@@ -11,7 +11,7 @@ The ey-cloud-recipes repository is a collection of [chef](http://wiki.opscode.co
 ## Quick Start Guide
 
 1. Clone this repository
-2. Uncomment the recipes that you wish to use in `cookbooks/main/recipes/default.rb`
+2. Symlink the recipes that you wish to use from `cookbooks/main/recipes/recipes-available` to `cookbooks/main/recipes/recipes-enabled`
 3. Make any changes that are mentioned in the individual cookbook's `readme.md` file
 4. Install the [engineyard](https://github.com/engineyard/engineyard) gem, if you haven't already (`gem install engineyard`).
 5. Upload your recipes to EY Cloud using `ey recipes upload -e ENVIRONMENT`, where `ENVIRONMENT` is the name of your environment.
@@ -59,3 +59,12 @@ You can view the recipes that have been uploaded to an environment in two ways:
 Next to each instance, on the [dashboard](https://cloud.engineyard.com/), there are two links entitled "Base" and "Custom", the "Custom" link will take you to the chef log for the last run of your custom chef recipes, for that instance.
 
 The chef log for your custom recipes is also located on each instance at `/var/log/chef.custom.log`
+
+### How do I symlink recipes?
+
+The easiest way to change into the `recipes-enabled` directory and symlink from `recipes-available` from there. For example, to enable the jenkins recipe:
+
+```bash
+cd cookbooks/main/recipes/recipes-enabled
+ln -s ../recipes-available/jenkins.rb jenkins.rb
+```
